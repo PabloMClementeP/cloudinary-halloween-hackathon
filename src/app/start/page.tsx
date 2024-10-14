@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, ChangeEvent } from 'react'
-import styled from 'styled-components'
 import { Ghost, Skull } from "lucide-react"
 import { Container, FormWrapper, ImagePreviewWrapper, Overlay, PreviewContainer, PreviewImage, StyledButton, StyledInput, StyledLabel, Title } from './style'
+import Link from 'next/link'
 
 
 
@@ -68,9 +68,11 @@ const Start = () => {
           </ImagePreviewWrapper>
         )}
         
+        <Link href={'/letter'}>
         <StyledButton>
           Generar carta
         </StyledButton>
+        </Link>
       </FormWrapper>
     </Container>
   )
