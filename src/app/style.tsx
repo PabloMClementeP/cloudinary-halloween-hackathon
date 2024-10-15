@@ -1,4 +1,4 @@
-import { Ghost, Skull, Moon, Star } from "lucide-react"; 
+import { Ghost, Skull, Moon, Star } from "lucide-react";
 import styled, { keyframes } from "styled-components";
 
 export const float = keyframes`
@@ -32,7 +32,7 @@ export const pulse = keyframes`
 
 // Contenedor principal
 export const Container = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;

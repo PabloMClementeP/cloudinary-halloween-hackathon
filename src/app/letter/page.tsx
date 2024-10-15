@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import { Ghost } from 'lucide-react';
 import Image from 'next/image';
+import { useStory } from '@/context/StoryContext';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -32,13 +33,15 @@ const TopBar = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 2rem;
-  padding-top: 3rem;
+  padding: 1rem;
+  padding-top: 0.5rem;
 `;
 
 const ImageContainer = styled.div`
   margin-bottom: 1.5rem;
   transform: rotate(-3deg);
+  display: flex;
+  justify-content: center;
 
   .image-wrapper {
     background-color: white;
@@ -107,6 +110,8 @@ const GridOverlay = styled.div`
 `;
 
 const Letter = () => {
+  const { name, image } = useStory();
+
   return (
     <Container>
       <StyledCard>
@@ -114,14 +119,15 @@ const Letter = () => {
         <Content>
           <ImageContainer>
             <div className="image-wrapper">
-              <Image src="https://placehold.co/200x200/png" width={200} height={200} alt="Spooky House"/>
+              <Image src={image || "https://placehold.co/200x200/png"} width={200} height={200} alt="Spooky House"/>
               <div className="border-overlay" />
             </div>
           </ImageContainer>
           <StoryText>
-            <p>Una fría noche de Halloween, Clara escuchó suaves susurros que venían del ático...</p>
+            <p>Querido {name || "lector"},</p>
+            <p>Una fría noche de Halloween, {name || "alguien"} escuchó suaves susurros que venían del ático...</p>
             <p>De repente, los susurros se convirtieron en risas aterradoras...</p>
-            <p>Nadie volvió a verla, pero cada Halloween se escucha su risa en la vieja casa.</p>
+            <p>Nadie volvió a ver a {name || "esa persona"}, pero cada Halloween se escucha su risa en la vieja casa.</p>
           </StoryText>
           <BouncingGhost size={32} />
         </Content>

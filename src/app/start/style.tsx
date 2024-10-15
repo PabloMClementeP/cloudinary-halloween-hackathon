@@ -2,11 +2,12 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #7a341a;
+  padding: 1rem;
 `;
 
 export const FormWrapper = styled.div`

@@ -4,15 +4,20 @@ import { useState, ChangeEvent } from 'react'
 import { Ghost, Skull } from "lucide-react"
 import { Container, FormWrapper, ImagePreviewWrapper, Overlay, PreviewContainer, PreviewImage, StyledButton, StyledInput, StyledLabel, Title } from './style'
 import Link from 'next/link'
+import { useStory } from '@/context/StoryContext'
 
 
 
 const Start = () => {
-  const [name, setName] = useState('')
+  const { name, setName, image, setImage, theme, setTheme } = useStory()
   const [imagePreview, setImagePreview] = useState<string | null>(null)
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
+  }
+
+  const handleStoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTheme(e.target.value)
   }
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +25,9 @@ const Start = () => {
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
-        setImagePreview(reader.result as string)
+        const result = reader.result as string
+        setImagePreview(result)
+        setImage(result)
       }
       reader.readAsDataURL(file)
     }
@@ -43,6 +50,18 @@ const Start = () => {
             placeholder="ej: Mamá, hermana, mundo..."
             value={name}
             onChange={handleNameChange}
+          />
+        </div>
+
+
+        <div>
+          <StyledLabel htmlFor="name">Sobre que es la historia:</StyledLabel>
+          <StyledInput
+            type="text"
+            id="story"
+            placeholder="ej: una fiesta de amigos..."
+            value={theme}
+            onChange={handleStoryChange}
           />
         </div>
         
@@ -69,9 +88,9 @@ const Start = () => {
         )}
         
         <Link href={'/letter'}>
-        <StyledButton>
-          Generar carta
-        </StyledButton>
+          <StyledButton>
+            Generar carta
+          </StyledButton>
         </Link>
       </FormWrapper>
     </Container>

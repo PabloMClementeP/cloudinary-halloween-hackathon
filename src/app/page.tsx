@@ -32,9 +32,9 @@ export default function Home() {
     
     <Link href="/start">
       <Button>
-        <Ghost className="mr-2" />
+        <Ghost style={{marginRight:'1rem'}} />
         Generar mi carta
-        <Skull className="ml-2" />
+        <Skull  style={{marginLeft:'1rem'}} />
       </Button>
     </Link>
     
