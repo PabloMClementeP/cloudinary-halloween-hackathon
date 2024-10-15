@@ -35,10 +35,12 @@ export const Content = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  margin-bottom: 1.5rem;
   transform: rotate(-3deg);
   display: flex;
   justify-content: center;
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
 
   .image-wrapper {
     background-color: white;
@@ -49,10 +51,10 @@ export const ImageContainer = styled.div`
   }
 
   img {
-    width: 12rem; /* w-48 */
-    height: 12rem;
+    width: 100%; /* w-48 */
+    height: auto;
     object-fit: cover;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
   }
 
   .border-overlay {

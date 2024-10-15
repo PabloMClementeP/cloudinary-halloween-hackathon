@@ -1,0 +1,149 @@
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatDelay1 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatDelay2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatDelay3 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Contenedor del encabezado */
+.header-container {
+  height: 60px;
+  background-color: #5e2a1d;
+  color: #ff6f3c;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Enlace del logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-link span {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+/* Navegación */
+.nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: block;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 16px;
+  }
+
+  .nav a:hover {
+    color: #ff9a7b;
+    transition: color 0.3s ease;
+  }
+}
+
+/* Botón de la barra lateral */
+.sidebar-button {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+/* Overlay de la barra lateral */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+
+/* Barra lateral */
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 16rem;
+  background-color: #5e2a1d;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+/* Botón de cerrar */
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+/* Navegación de la barra lateral */
+.sidebar-nav {
+  margin-top: 3rem;
+}
+
+.sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-nav a:hover {
+  color: #ff9a7b;
+  transition: color 0.3s ease;
+}
