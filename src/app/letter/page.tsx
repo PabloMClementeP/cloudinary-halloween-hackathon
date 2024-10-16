@@ -1,6 +1,6 @@
 "use client";
 import { useStory } from "@/context/StoryContext";
-import { Container } from "./style";
+import { Container, ImageWrapper } from "./style";
 import {
   BouncingGhost,
   Content,
@@ -15,11 +15,12 @@ import { STORY_PROMPT } from "@/constants/prompt";
 import { generateLetter } from "@/services/get-letter";
 import { getCldImageUrl } from "next-cloudinary";
 import Image from "next/image";
+import Spinner from "@/components/spinner";
 
 const Letter = () => {
   const { name, imageUrl, theme, image, setImageUrl } = useStory();
   const [letter, setLetter] = useState<any>(null);
-
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
     const prompt = STORY_PROMPT.replace("{name}", name).replace(
@@ -30,29 +31,35 @@ const Letter = () => {
     const getLetter = async () => {
       const letter = await generateLetter(prompt);
       try {
-        setLetter(JSON.parse(letter || ""));
+        const parsedLetter = JSON.parse(letter || "");
+        setLetter(parsedLetter);
+
+        // const promptText = `Añade un background de terror basado en una historia de ${parsedLetter?.resumen}`;
+        // const encodedPrompt = encodeURIComponent(promptText);
+
+        const myImage = getCldImageUrl({
+          src: image,
+          width: 300,
+          height: 300,
+          replaceBackground:  `Añade un background de terror basado en una historia de ${parsedLetter?.resumen}`,
+        });
+
+        setImageUrl(myImage);
       } catch (error) {
         console.error("Error generating letter:", error);
       }
     };
 
     getLetter();
+  }, [name, theme, image, setImageUrl]);
 
-    const myImage = getCldImageUrl({
-      src: image,
-      width: 300,
-      height: 300,
-      replaceBackground:
-      `Añade un background de terror basado en una hostoria de ${letter?.resumen}`
-    });
-    setImageUrl(myImage);
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
 
-  }, []);
-
-
-if(imageUrl === ""){
-  return <div>Loading...</div>
-}
+  if (!letter && !imageUrl) {
+    return <Spinner />;
+  }
 
   return (
     <Container>
@@ -60,24 +67,27 @@ if(imageUrl === ""){
         <TopBar />
         <Content>
           <ImageContainer>
-            <div className="image-wrapper">
-                <Image
-                  width="100"
-                  height="100"
-                  src={imageUrl}
-                  sizes="100vw"
-                  alt="Scary image"
-                />
+            <ImageWrapper>
+              {isImageLoading && (
+                <div className="skeleton" style={{ width: 300, height: 300 }} />
+              )}
+
+              <img
+                width={300}
+                height={300}
+                src={imageUrl}
+                sizes="100vw"
+                alt="Scary image"
+                onLoad={handleImageLoad}
+                className={isImageLoading ? "hidden" : ""}
+              />
               <div className="border-overlay" />
-            </div>
+            </ImageWrapper>
           </ImageContainer>
-          {letter ? (
-            <StoryText>
-              <p>{letter.historia}</p>
-            </StoryText>
-          ) : (
-            <>Loading ....</>
-          )}
+
+          <StoryText>
+            <p>{letter?.historia}</p>
+          </StoryText>
           <BouncingGhost size={32} />
         </Content>
         <GridOverlay />

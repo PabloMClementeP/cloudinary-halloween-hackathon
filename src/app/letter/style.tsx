@@ -72,7 +72,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const StoryText = styled.div`
-  font-family: 'Handwriting', cursive;
+  font-family: var(--font-gloria), cursive;
   font-size: 1.125rem; /* text-lg */
   line-height: 1.75rem;
   color: #374151; /* text-gray-800 */
@@ -107,3 +107,36 @@ export const GridOverlay = styled.div`
   pointer-events: none;
   z-index: -1;
 `;
+
+
+
+/* Tu archivo CSS o módulo CSS */
+export const ImageWrapper = styled.div`
+  position: relative;
+  width: 300px;
+  height: 300px;
+
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f5f5f5;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+
+.hidden {
+  display: none;
+}
+`
+
+

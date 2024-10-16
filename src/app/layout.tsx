@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Gloria_Hallelujah } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { StoryProvider } from "@/context/StoryContext";
@@ -14,6 +15,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const gloria = Gloria_Hallelujah({
+  subsets: ["latin"],
+  variable: "--font-gloria",
+  weight: ["400"], 
+});
 
 export const metadata: Metadata = {
   title: "Cloudinary - Halloween Hackathon",
@@ -27,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${gloria.variable}`}>
         <StoryProvider>
           <Header />
           {children}
