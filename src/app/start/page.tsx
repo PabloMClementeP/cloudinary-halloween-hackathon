@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import Link from "next/link";
 import { Ghost, Skull } from "lucide-react";
 import { useStory } from "@/context/StoryContext";
@@ -19,6 +19,11 @@ import { CldUploadWidget, CldImage } from "next-cloudinary";
 
 const Start = () => {
   const { name, setName, setImage, theme, setTheme } = useStory();
+  const [ imageSize, setImageSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +33,7 @@ const Start = () => {
   const handleStoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);
   };
-
+  
 
   return (
     <Container>
@@ -40,7 +45,7 @@ const Start = () => {
         </Title>
 
         <div>
-          <StyledLabel htmlFor="name">A quien va dedicado:</StyledLabel>
+          <StyledLabel htmlFor="name">A quien dedicas la carta:</StyledLabel>
           <StyledInput
             type="text"
             id="name"
@@ -51,7 +56,7 @@ const Start = () => {
         </div>
 
         <div>
-          <StyledLabel htmlFor="name">Sobre que es la historia:</StyledLabel>
+          <StyledLabel htmlFor="name">Describe la situación:</StyledLabel>
           <StyledInput
             type="text"
             id="story"
@@ -85,6 +90,10 @@ const Start = () => {
               },
             }}
             onSuccess={(result : any) => {
+              setImageSize({
+                width: result?.info?.width,
+                height: result?.info?.height,
+              });
               setImage(result?.info?.public_id);
               setImagePreview(result?.info?.url);
             }}
@@ -113,11 +122,12 @@ const Start = () => {
             </h2>
             <PreviewContainer>
               <CldImage
-                width="260"
-                height="100"
+                width={imageSize.width}
+                height={imageSize.height}
                 src={imagePreview}
                 sizes="100vw"
                 alt="Description of my image"
+                style={{ width: "100%", height: "auto" }}
               />
               <Overlay />
             </PreviewContainer>

@@ -1,6 +1,6 @@
 ## Scary Letter / Application for Clodinary Hackathon
 
-![Scary Letter](src/public/main-thumbnail.png)
+![Scary Letter](/public/main-thumbnail.png)
 
 First, run the development server:
 

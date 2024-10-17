@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import { STORY_PROMPT } from "@/constants/prompt";
 import { generateLetter } from "@/services/get-letter";
 import { getCldImageUrl } from "next-cloudinary";
-import Image from "next/image";
 import Spinner from "@/components/spinner";
 
 const Letter = () => {
@@ -23,10 +22,12 @@ const Letter = () => {
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
+    setImageUrl('');
     const prompt = STORY_PROMPT.replace("{name}", name).replace(
       "{theme}",
       theme
     );
+
 
     const getLetter = async () => {
       const letter = await generateLetter(prompt);
@@ -34,14 +35,11 @@ const Letter = () => {
         const parsedLetter = JSON.parse(letter || "");
         setLetter(parsedLetter);
 
-        // const promptText = `Añade un background de terror basado en una historia de ${parsedLetter?.resumen}`;
-        // const encodedPrompt = encodeURIComponent(promptText);
-
         const myImage = getCldImageUrl({
           src: image,
           width: 300,
           height: 300,
-          replaceBackground:  `Añade un background de terror basado en una historia de ${parsedLetter?.resumen}`,
+          replaceBackground:  `Añade un fondo mounstroso y fantasmal basado en una historia de ${parsedLetter?.resumen}`,
         });
 
         setImageUrl(myImage);
@@ -57,7 +55,7 @@ const Letter = () => {
     setIsImageLoading(false);
   };
 
-  if (!letter && !imageUrl) {
+  if (!letter && isImageLoading) {
     return <Spinner />;
   }
 
