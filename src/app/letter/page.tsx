@@ -39,7 +39,7 @@ const Letter = () => {
           src: image,
           width: 300,
           height: 300,
-          replaceBackground:  `Añade un fondo mounstroso y fantasmal basado en una historia de ${parsedLetter?.resumen}`,
+          replaceBackground:  `Añade un fondo de terror basado en una historia de ${parsedLetter?.resumen}`,
         });
 
         setImageUrl(myImage);

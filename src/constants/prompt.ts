@@ -4,7 +4,7 @@ export const STORY_PROMPT = `
 ### Instrucciones:
 
 - **TÚ ERES** un escritor experto, inspirado por autores como los Hermanos Grimm, Stephen king, Lovercraft.
-- Tu tarea es **CREAR** una carta dedicada a {name}, con una corta historia aterradora y original de miedo. La historia sera sobre {theme}.
+- Tu tarea es **CREAR** una carta dedicada a {name}, con una corta historia aterradora y original de miedo. La historia sera sobre {theme}, que tenga un estilo de ultima carta escrita antes que le suceda algo a quien lo escribe.
 - Su longitud mínima de 220 palabras y máxima de 300 palabras.
 - Debes hacer un resumen de la historia en menos de 10 palabras.
 - La salida debe estar en formato JSON.

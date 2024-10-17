@@ -66,6 +66,8 @@ const Start = () => {
           />
         </div>
 
+        {!imagePreview &&
+        
         <div>
           <StyledLabel htmlFor="image-upload">Selecciona la imágen</StyledLabel>
           <CldUploadWidget
@@ -107,6 +109,7 @@ const Start = () => {
             }}
           </CldUploadWidget>
         </div>
+        }
 
         {imagePreview && (
           <ImagePreviewWrapper>
