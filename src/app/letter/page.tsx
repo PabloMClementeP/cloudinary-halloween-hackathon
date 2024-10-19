@@ -15,6 +15,7 @@ import {
 } from "./style";
 import Spinner from "@/components/spinner";
 import useLetterImage from "@/hooks/useLetterImage"; 
+import { uploadToCloudinary } from "@/services/upload-image";
 
 const Letter = () => {
   const { name, imageUrl, theme, image, setImageUrl } = useStory();
@@ -29,7 +30,6 @@ const Letter = () => {
   const elementRef = useRef<HTMLDivElement>(null);
 
   const htmlToImageConvert = () => {
-    console.log('convert');
     if (elementRef.current) {
 
       toPng(elementRef.current, { cacheBust: false })
@@ -47,6 +47,21 @@ const Letter = () => {
       }
   };
 
+  const handleGenerateAndShare = async () => {
+    if (elementRef.current) {      
+      try {
+        const dataUrl = await toPng(elementRef.current, { cacheBust: false });
+  
+        const imageUrl = await uploadToCloudinary(dataUrl);
+    
+        console.log('Image to share: ',imageUrl);
+      } catch (err) {
+        console.log("Error generating image:", err);
+      }
+    }
+  };
+  
+
 
   if (!letter && isImageLoading) {
     return <Spinner />;
@@ -56,6 +71,7 @@ const Letter = () => {
     <>
     <Container>
     <StyledButton onClick={htmlToImageConvert}>Descargar tu carta <ImageDown /></StyledButton>
+    <StyledButton onClick={handleGenerateAndShare}>Compartir imagen <ImageDown /></StyledButton>
       <StyledCard ref={elementRef}>
         <TopBar />
         <Content>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IMAGE_PROMPT, STORY_PROMPT } from "@/constants/prompt";
 import { generateLetter } from "@/services/get-letter";
-import { getCldImageUrl } from "next-cloudinary";
+import { generateImageWithPrompt } from "@/services/generate-image";
 
 const useLetterImage = (name: string, theme: string, image: string, setImageUrl: (url: string) => void) => {
   const [letter, setLetter] = useState<any>(null);
@@ -20,16 +20,8 @@ const useLetterImage = (name: string, theme: string, image: string, setImageUrl:
         const encodedBackground = encodeURIComponent(parsedLetter?.resumen);
         const image_prompt = IMAGE_PROMPT.replace("{story}", encodedBackground );
 
-        const myImage = getCldImageUrl({
-          src: image,
-          width: 300,
-          height: 300,
-          replaceBackground: image_prompt,
-        });
-
-        console.log(myImage);
-        
-
+        const myImage = await generateImageWithPrompt(image, image_prompt);
+                
         setImageUrl(myImage);
       } catch (error) {
         console.error("Error generating letter or image:", error);
