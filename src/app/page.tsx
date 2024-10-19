@@ -1,16 +1,9 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Ghost, Skull, Moon, Star } from "lucide-react";
 import './style.css';
 
 export default function Home() {
-  const router = useRouter();
-
-  const handleStartClick = () => {
-    router.push('/start');
-  };
-
   return (
     <div className="container">
       <div className="floating-icons">

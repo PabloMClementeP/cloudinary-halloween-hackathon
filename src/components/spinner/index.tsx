@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 // Animaciones
 const float = keyframes`
@@ -74,16 +74,24 @@ const dots = keyframes`
   75% { content: '...'; }
 `;
 
-// Estilos usando styled-components
+const Wrapper = styled.div`
+  height: calc(100dvh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #31253d;
+  padding: 0.5rem;
+`;
+
 const GhostContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 80%;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-size: 40vmin;
-  background-color: #31253d;
-  padding: 0.5rem;
+  font-size: 24vmin;
+  margin-top: 100px;
 `;
 
 const Ghost = styled.div`
@@ -91,7 +99,6 @@ const Ghost = styled.div`
   overflow: hidden;
   height: 1.3em;
   filter: drop-shadow(0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4));
-  animation: ${float} 3s ease-in-out infinite;
   opacity: 0.9;
 `;
 
@@ -101,8 +108,9 @@ const GhostBody = styled.div`
   border-radius: 0.5em 0.5em 0 0;
   background-color: #ff6f3c;
   position: relative;
-  &::before, &::after {
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     position: absolute;
     top: 0.5em;
     width: 0.2em;
@@ -156,7 +164,7 @@ const GhostTail4 = styled(GhostTail)`
 `;
 
 const PhraseOutput = styled.p`
-  font-family: 'Creepster', cursive;
+  font-family: "Creepster", cursive;
   font-size: 0.18em;
   color: #e6955f;
   letter-spacing: 0.03em;
@@ -166,7 +174,7 @@ const PhraseOutput = styled.p`
   position: relative;
   text-align: center;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     animation: ${dots} 850ms linear infinite;
   }
@@ -181,13 +189,13 @@ const Spinner = () => {
     "preparando el disfraz",
     "calibración del espantómetro",
     "contactando espíritus",
-    "levantando muertos vivientes"
+    "levantando muertos vivientes",
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       // Avanzar al siguiente índice y volver al primero cuando se complete la lista
-      setPhraseIndex(prevIndex => (prevIndex + 1) % phrases.length);
+      setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
     }, 1500); // Cambiar frase cada 1.5 segundos
 
     // Limpiar el intervalo cuando el componente se desmonta
@@ -195,18 +203,20 @@ const Spinner = () => {
   }, [phrases.length]);
 
   return (
-    <GhostContainer>
-      <Ghost>
-        <GhostBody>
-          <GhostMouth />
-        </GhostBody>
-        <GhostTail1 />
-        <GhostTail2 />
-        <GhostTail3 />
-        <GhostTail4 />
-      </Ghost>
-      <PhraseOutput>{phrases[phraseIndex]}</PhraseOutput>
-    </GhostContainer>
+    <Wrapper>
+      <GhostContainer>
+        <Ghost>
+          <GhostBody>
+            <GhostMouth />
+          </GhostBody>
+          <GhostTail1 />
+          <GhostTail2 />
+          <GhostTail3 />
+          <GhostTail4 />
+        </Ghost>
+        <PhraseOutput>{phrases[phraseIndex]}</PhraseOutput>
+      </GhostContainer>
+    </Wrapper>
   );
 };
 
