@@ -10,6 +10,8 @@ interface StoryContextType {
   setTheme: (theme: string) => void;
   imageUrl: string;
   setImageUrl: (imageUrl: string) => void;
+  uploadImage: string;
+  setUploadImage: (uploadImage: string) => void;
 }
 
 const StoryContext = createContext<StoryContextType | undefined>(undefined);
@@ -19,9 +21,10 @@ export const StoryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [image, setImage] = useState<string>('');
   const [theme, setTheme] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [uploadImage, setUploadImage] = useState('');
 
   return (
-    <StoryContext.Provider value={{ name, setName, image, setImage, theme, setTheme, imageUrl, setImageUrl }}>
+    <StoryContext.Provider value={{ name, setName, image, setImage, theme, setTheme, imageUrl, setImageUrl, uploadImage, setUploadImage }}>
       {children}
     </StoryContext.Provider>
   );

@@ -19,7 +19,7 @@ import { CldUploadWidget, CldImage } from "next-cloudinary";
 
 const Start = () => {
   const { name, setName, setImage, theme, setTheme } = useStory();
-  const [ imageSize, setImageSize] = useState({
+  const [imageSize, setImageSize] = useState({
     width: 0,
     height: 0,
   });
@@ -33,7 +33,6 @@ const Start = () => {
   const handleStoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);
   };
-  
 
   return (
     <Container>
@@ -45,71 +44,72 @@ const Start = () => {
         </Title>
 
         <div>
-          <StyledLabel htmlFor="name">A quien dedicas la carta:</StyledLabel>
+          <StyledLabel htmlFor="name">Tu carta será dedicada a:</StyledLabel>
           <StyledInput
             type="text"
             id="name"
-            placeholder="ej: Mamá, hermana, mundo..."
+            placeholder="ej: Mamá, hermana, mundo cruel..."
             value={name}
             onChange={handleNameChange}
           />
         </div>
 
         <div>
-          <StyledLabel htmlFor="name">Describe la situación:</StyledLabel>
+          <StyledLabel htmlFor="name">Que te da miedo ?</StyledLabel>
           <StyledInput
             type="text"
             id="story"
-            placeholder="ej: una fiesta de amigos..."
+            placeholder="ej: noche de halloween, brujas voladoras ..."
             value={theme}
             onChange={handleStoryChange}
           />
         </div>
 
-        {!imagePreview &&
-        
-        <div>
-          <StyledLabel htmlFor="image-upload">Selecciona la imágen</StyledLabel>
-          <CldUploadWidget
-            uploadPreset="unsigned-media"
-            options={{
-              sources: ["local"],
-              multiple: false,
-              maxFiles: 1,
-              language: "es",
-              text: {
-                es: {
-                  or: "O",
-      
-                  menu: {
-                    files: "Subir desde tu dispositivo",
-                  },
-                  local: {
-                    browse: "Seleccionar",
-                    dd_title_single: "Arrastra tu imagen aquí",
+        {!imagePreview && (
+          <div>
+            <StyledLabel htmlFor="image-upload">
+              Selecciona una imágen
+            </StyledLabel>
+            <CldUploadWidget
+              uploadPreset="unsigned-media"
+              options={{
+                sources: ["local"],
+                multiple: false,
+                maxFiles: 1,
+                language: "es",
+                text: {
+                  es: {
+                    or: "O",
+
+                    menu: {
+                      files: "Subir desde tu dispositivo",
+                    },
+                    local: {
+                      browse: "Seleccionar",
+                      dd_title_single: "Arrastra tu imagen aquí",
+                    },
                   },
                 },
-              },
-            }}
-            onSuccess={(result : any) => {
-              setImageSize({
-                width: result?.info?.width,
-                height: result?.info?.height,
-              });
-              setImage(result?.info?.public_id);
-              setImagePreview(result?.info?.url);
-            }}
-          >
-            {({ open }) => {
-              return (
-                <StyledButton onClick={() => open()}>
-                  Selecciona la imagen
-                </StyledButton>
-              );
-            }}
-          </CldUploadWidget>
-        </div>
-        }
+              }}
+              onSuccess={(result: any) => {
+                setImageSize({
+                  width: result?.info?.width,
+                  height: result?.info?.height,
+                });
+                setImage(result?.info?.public_id);
+                setImagePreview(result?.info?.url);
+              }}
+            >
+              {({ open }) => {
+                return (
+                  <StyledButton onClick={() => open()}>
+                    Selecciona la imagen
+                  </StyledButton>
+                );
+              }}
+            </CldUploadWidget>
+          </div>
+        )}
 
         {imagePreview && (
           <ImagePreviewWrapper>
