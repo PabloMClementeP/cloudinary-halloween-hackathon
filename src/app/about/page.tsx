@@ -2,7 +2,7 @@
 import React from "react";
 import { Ghost, Skull, Star, Moon } from "lucide-react";
 import Image from "next/image";
-import { Container, Content, FloatingIcon } from "./style";
+import { Container, Content, FloatingIcon, Paragraph, Subtitle, Title } from "./style";
 import Link from "next/link";
 
 
@@ -20,28 +20,27 @@ export default function About() {
 
       {/* Content */}
       <Content>
-        <h1>Acerca de Scary Letter</h1>
-        <p>
+        <Title>Acerca de Scary Letter</Title>
+        <Paragraph>
           ¿Listo para una buena dosis de sustos y risas? Scary Letter fue creado
-          por Pablo Clemente, un apasionado desarrollador de software con una
-          obsesión saludable por Halloween y las historias de terror. Nuestro
+          por <Link href={"https://github.com/PabloMClementeP"}>Pablo Clemente</Link>, apasionado desarrollador de software con una
+          obsesión saludable por Halloween y las historias de terror. Mi
           objetivo es brindarte una experiencia única y espeluznante para
           compartir cuentos terroríficos con amigos y familiares, con un toque
-          de humor oscuro.{" "}
-        </p>
-        <p>
-          Este proyecto nació en la hackathon de Midudev y Cloudinary, donde la
+          de humor oscuro.
+        </Paragraph>
+        <Paragraph>
+          Este proyecto se creó para la hackathon de <Link href={"https://midu.dev/"}>Midudev</Link> y <Link href={"https://cloudinary.com/"}>Clodinary</Link>, donde la
           creatividad y la tecnología se encuentran para dar vida a ideas
-          increíbles. Pablo, un entusiasta de la programación y el diseño web,
-          combina sus habilidades técnicas con su desbordante imaginación para
-          crear esta plataforma interactiva de narración de historias de miedo.
-          Con Scary Letter, esperamos inspirar la imaginación, arrancar sonrisas
+          increíbles. Allí nace mi idea de esta plataforma interactiva de narración de historias de miedo.
+          Con Scary Letter, espero inspirar la imaginación, arrancar sonrisas
           nerviosas y provocar escalofríos con cada carta generada.
-        </p>
-        <p>
+        </Paragraph>
+        <Paragraph>
           Prepárate para dejar volar tu creatividad y sumergirte en el mundo de
           los sustos más graciosos y espeluznantes. ¡Que comiencen los sustos!
-        </p>
+        </Paragraph>
+        <Subtitle>Link al repositorio</Subtitle>
         <Link href={'https://github.com/PabloMClementeP/cloudinary-halloween-hackathon'} target="_blank">
         <Image
           src="/git.webp" 

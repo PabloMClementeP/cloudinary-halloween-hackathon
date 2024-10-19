@@ -39,27 +39,41 @@ export const Content = styled.div`
   max-width: 640px;
   text-align: center;
   z-index: 10;
+`;
 
-  h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: aliceblue;
-    font-family: var(--font-gloria), cursive;
+export const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: aliceblue;
+  font-family: var(--font-gloria), cursive;
 
-    @media (min-width: 768px) {
-      font-size: 3rem;
-    }
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+`;
+
+export const Subtitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: wheat;
+  font-family: var(--font-gloria), cursive;
+  @media (min-width: 768px) {
+    font-size: 1.75rem;
+  }
+`;
+
+export const Paragraph = styled.p`
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: wheat;
+  font-family: var(--font-gloria), cursive;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
   }
 
-  p {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-    color: wheat;
-    font-family: var(--font-gloria), cursive;
-
-    @media (min-width: 768px) {
-      font-size: 1.25rem;
-    }
+  a {
+    color: #f97316;
   }
 `;

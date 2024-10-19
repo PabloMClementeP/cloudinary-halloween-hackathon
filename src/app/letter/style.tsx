@@ -72,12 +72,16 @@ export const ImageContainer = styled.div`
 `;
 
 export const StoryText = styled.div`
+  color: #292c30;
+  position: relative;
+  z-index: 10;
+`;
+
+export const LetterParagraph = styled.p`
   font-family: var(--font-gloria), cursive;
   font-size: 1.125rem;
   line-height: 2rem;
   color: #292c30;
-  position: relative;
-  z-index: 10;
 `;
 
 export const BouncingGhost = styled(Ghost)`

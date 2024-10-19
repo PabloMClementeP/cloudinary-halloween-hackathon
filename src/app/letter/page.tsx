@@ -3,7 +3,7 @@ import { useStory } from "@/context/StoryContext";
 import { useRef } from "react";
 import { toPng } from "html-to-image";
 import { ImageDown } from "lucide-react";
-import { Container, ImageWrapper, StyledButton } from "./style";
+import { Container, ImageWrapper, LetterParagraph, StyledButton } from "./style";
 import {
   BouncingGhost,
   Content,
@@ -131,7 +131,7 @@ const Letter = () => {
             </ImageContainer>
 
             <StoryText>
-              <p>{letter?.historia}</p>
+              <LetterParagraph>{letter?.historia}</LetterParagraph>
             </StoryText>
             <BouncingGhost size={32} />
           </Content>
