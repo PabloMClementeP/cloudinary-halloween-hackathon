@@ -16,9 +16,8 @@ const geistMono = localFont({
   weight: "100 900",
 });
 const gloria = Gloria_Hallelujah({
-  subsets: ["latin"],
-  variable: "--font-gloria",
-  weight: ["400"], 
+  subsets: ['latin'],
+  weight: '400', 
 });
 
 export const metadata: Metadata = {
@@ -33,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${gloria.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${gloria.className}`}>
         <StoryProvider>
           <Header />
           {children}
