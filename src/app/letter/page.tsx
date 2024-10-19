@@ -1,6 +1,9 @@
 "use client";
 import { useStory } from "@/context/StoryContext";
-import { Container, ImageWrapper } from "./style";
+import { useRef } from "react";
+import { toPng } from 'html-to-image';
+import { ImageDown } from "lucide-react";
+import { Container, ImageWrapper, StyledButton } from "./style";
 import {
   BouncingGhost,
   Content,
@@ -10,58 +13,50 @@ import {
   StyledCard,
   TopBar,
 } from "./style";
-import { useEffect, useState } from "react";
-import { STORY_PROMPT } from "@/constants/prompt";
-import { generateLetter } from "@/services/get-letter";
-import { getCldImageUrl } from "next-cloudinary";
 import Spinner from "@/components/spinner";
+import useLetterImage from "@/hooks/useLetterImage"; 
 
 const Letter = () => {
   const { name, imageUrl, theme, image, setImageUrl } = useStory();
-  const [letter, setLetter] = useState<any>(null);
-  const [isImageLoading, setIsImageLoading] = useState(true);
 
-  useEffect(() => {
-    setImageUrl('');
-    const prompt = STORY_PROMPT.replace("{name}", name).replace(
-      "{theme}",
-      theme
-    );
+  const { letter, isImageLoading, handleImageLoad } = useLetterImage(
+    name,
+    theme,
+    image,
+    setImageUrl
+  );
 
+  const elementRef = useRef<HTMLDivElement>(null);
 
-    const getLetter = async () => {
-      const letter = await generateLetter(prompt);
-      try {
-        const parsedLetter = JSON.parse(letter || "");
-        setLetter(parsedLetter);
+  const htmlToImageConvert = () => {
+    console.log('convert');
+    if (elementRef.current) {
 
-        const myImage = getCldImageUrl({
-          src: image,
-          width: 300,
-          height: 300,
-          replaceBackground:  `Añade un fondo de terror basado en una historia de ${parsedLetter?.resumen}`,
-        });
-
-        setImageUrl(myImage);
-      } catch (error) {
-        console.error("Error generating letter:", error);
+      toPng(elementRef.current, { cacheBust: false })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = `${name}.png`;
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log("Error generating image:", err);
+      });
+    } else {
+      console.log('No element ref');
       }
-    };
-
-    getLetter();
-  }, [name, theme, image, setImageUrl]);
-
-  const handleImageLoad = () => {
-    setIsImageLoading(false);
   };
+
 
   if (!letter && isImageLoading) {
     return <Spinner />;
   }
 
   return (
+    <>
     <Container>
-      <StyledCard>
+    <StyledButton onClick={htmlToImageConvert}>Descargar tu carta <ImageDown /></StyledButton>
+      <StyledCard ref={elementRef}>
         <TopBar />
         <Content>
           <ImageContainer>
@@ -78,7 +73,7 @@ const Letter = () => {
                 alt="Scary image"
                 onLoad={handleImageLoad}
                 className={isImageLoading ? "hidden" : ""}
-              />
+                />
               <div className="border-overlay" />
             </ImageWrapper>
           </ImageContainer>
@@ -91,6 +86,7 @@ const Letter = () => {
         <GridOverlay />
       </StyledCard>
     </Container>
+    </>
   );
 };
 

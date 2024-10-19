@@ -19,3 +19,5 @@ export const STORY_PROMPT = `
   "resumen": "Resumen de la historia"
 }
 `;
+
+export const IMAGE_PROMPT = `adds horror images and a creepy panorama with the story {story}`;
