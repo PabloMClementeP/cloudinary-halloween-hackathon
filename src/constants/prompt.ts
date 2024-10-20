@@ -21,4 +21,4 @@ export const STORY_PROMPT = `
 }
 `;
 
-export const IMAGE_PROMPT = `adds horror images and a creepy panorama with the story {story}`;
+export const IMAGE_PROMPT = `add real ghosts and spirits to the background in a horrific situation`;
