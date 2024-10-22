@@ -2,9 +2,12 @@
 import Link from 'next/link';
 import { Ghost, Skull, Moon, Star } from "lucide-react";
 import './style.css';
+import ParallaxLayer from '@/components/parallax-layer';
 
 export default function Home() {
   return (
+    <>
+    <ParallaxLayer />
     <div className="container">
       <div className="floating-icons">
         <Ghost className="floating-ghost" size={48} />
@@ -35,5 +38,7 @@ export default function Home() {
         Atención: Entra bajo tu propia responsabilidad. Los espíritus están inquietos esta noche...
       </div>
     </div>
+    </>
+
   );
 }

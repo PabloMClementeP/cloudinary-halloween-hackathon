@@ -24,9 +24,7 @@ export const FloatingIcon = styled.div<{
 
 export const Container = styled.div`
   min-height: calc(100vh - 60px);
-
-  background: linear-gradient(to bottom, #7a341a, black);
-  color: ${({ theme }) => theme.primaryColor};
+  background-image: url('/halloween_bg.webp');  
   position: relative;
   overflow: hidden;
   display: flex;
@@ -64,7 +62,7 @@ export const Subtitle = styled.h2`
 export const Paragraph = styled.p`
   font-size: 1.125rem;
   margin-bottom: 2rem;
-  color: wheat;
+  color: #fff;
 
   @media (min-width: 768px) {
     font-size: 1.25rem;
