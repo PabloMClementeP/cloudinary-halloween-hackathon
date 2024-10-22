@@ -3,7 +3,7 @@ import { useStory } from "@/context/StoryContext";
 import { useRef } from "react";
 import { toPng } from "html-to-image";
 import { ImageDown } from "lucide-react";
-import { Container, ImageWrapper, LetterParagraph, StyledButton } from "./style";
+import { ButtonSkeleton, Container, ImageWrapper, LetterParagraph, StyledButton } from "./style";
 import {
   BouncingGhost,
   Content,
@@ -92,19 +92,35 @@ const Letter = () => {
   return (
     <>
       <Container>
-        <StyledButton onClick={htmlToImageConvert}>
-          Descargar tu carta <ImageDown />
-        </StyledButton>
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <StyledButton onClick={shareOnX}>
-            Compartir por
-            <Image src="/twitter.png" alt="git logo" width={32} height={32} />
+        {isImageLoading 
+         ?(
+          <>
+          <ButtonSkeleton />
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <ButtonSkeleton />
+            <ButtonSkeleton />
+          </div>
+          </>
+         )
+         : (
+          <>
+          <StyledButton onClick={htmlToImageConvert}>
+            Descargar tu carta <ImageDown />
           </StyledButton>
-          <StyledButton onClick={shareOnFacebook}>
-            Compartir por
-            <Image src="/facebook.png" alt="git logo" width={32} height={32} />
-          </StyledButton>
-        </div>
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <StyledButton onClick={shareOnX}>
+              Compartir por
+              <Image src="/twitter.png" alt="git logo" width={32} height={32} />
+            </StyledButton>
+            <StyledButton onClick={shareOnFacebook}>
+              Compartir por
+              <Image src="/facebook.png" alt="git logo" width={32} height={32} />
+            </StyledButton>
+          </div>
+          </>
+         )
+        }
+
         <StyledCard ref={elementRef}>
           <TopBar />
           <Content>
