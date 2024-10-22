@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Ghost } from "lucide-react";
 
 export const Container = styled.div`
@@ -154,4 +154,27 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: #fb923c;
   }
+`;
+
+const shimmer = keyframes`
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`;
+
+export const ButtonSkeleton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: ${shimmer} 1.5s infinite ease-in-out;
+  width: 150px;
+  height: 64px; 
 `;
