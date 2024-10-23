@@ -6,8 +6,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #7a341a;
+  /* background-color: #7a341a; */
   padding: 1rem;
+  background: url('/generate_bg.webp');
+  background-size: cover;
+  background-position: bottom;
 `;
 
 export const FormWrapper = styled.div`
@@ -18,6 +21,7 @@ export const FormWrapper = styled.div`
   max-width: 28rem;
   width: 100%;
   border: 2px solid #f97316;
+  box-shadow: 3px 6px 10px 0px rgba(202, 199, 199, 0.57);
 `;
 
 export const Title = styled.h1`
