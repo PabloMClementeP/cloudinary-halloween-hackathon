@@ -8,15 +8,15 @@ cloudinary.v2.config({
 });
 
 export async function POST(req: Request) {
-  const { publicId, prompt } = await req.json();
+  const { publicId, prompt, imageSize } = await req.json();
 
   try {
     const imageUrl = cloudinary.v2.url(publicId, {
       transformation: [
         {
           effect: `gen_background_replace:prompt_${encodeURIComponent(prompt)}`,
-          width: 300,
-          height: 300,
+          width: imageSize.width,
+          height: imageSize.height,
         },
       ],
     });

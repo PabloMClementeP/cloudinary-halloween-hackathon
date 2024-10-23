@@ -3,7 +3,7 @@ import { IMAGE_PROMPT, STORY_PROMPT } from "@/constants/prompt";
 import { generateLetter } from "@/services/get-letter";
 import { generateImageWithPrompt } from "@/services/generate-image";
 
-const useLetterImage = (name: string, theme: string, image: string, setImageUrl: (url: string) => void) => {
+const useLetterImage = (name: string, theme: string, image: string, imageSize: any, setImageUrl: (url: string) => void) => {
   const [letter, setLetter] = useState<any>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
@@ -20,7 +20,7 @@ const useLetterImage = (name: string, theme: string, image: string, setImageUrl:
         const encodedBackground = encodeURIComponent(parsedLetter?.resumen);
         const image_prompt = IMAGE_PROMPT.replace("{story}", encodedBackground );
 
-        const myImage = await generateImageWithPrompt(image, image_prompt);
+        const myImage = await generateImageWithPrompt(image, image_prompt, imageSize);
                 
         setImageUrl(myImage);
       } catch (error) {

@@ -1,6 +1,7 @@
 export const generateImageWithPrompt = async (
   publicId: string,
-  prompt: string
+  prompt: string,
+  imageSize: any
 ) => {
   try {
     const response = await fetch("/api/generate-image", {
@@ -8,7 +9,7 @@ export const generateImageWithPrompt = async (
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ publicId, prompt }),
+      body: JSON.stringify({ publicId, prompt, imageSize }),
     });
 
     const data = await response.json();

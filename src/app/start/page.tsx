@@ -16,24 +16,30 @@ import {
   Title,
 } from "./style";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
+import { image } from "framer-motion/client";
 
 const Start = () => {
-  const { name, setName, setImage, theme, setTheme } = useStory();
-  const [imageSize, setImageSize] = useState({
-    width: 0,
-    height: 0,
-  });
-
+  const { name, setName, setImage, theme, setTheme, setImageSize, imageSize } = useStory();
+  
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
+  
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
-
+  
   const handleStoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);
   };
 
+  const handleSuccess = (result : any) => {
+    setImageSize({
+      width: result?.info?.width,
+      height: result?.info?.height,
+    });
+    setImage(result?.info?.public_id);
+    setImagePreview(result?.info?.url);
+  }
+  
   return (
     <Container>
       <FormWrapper>
@@ -92,12 +98,7 @@ const Start = () => {
                 },
               }}
               onSuccess={(result: any) => {
-                setImageSize({
-                  width: result?.info?.width,
-                  height: result?.info?.height,
-                });
-                setImage(result?.info?.public_id);
-                setImagePreview(result?.info?.url);
+                handleSuccess(result);
               }}
             >
               {({ open }) => {

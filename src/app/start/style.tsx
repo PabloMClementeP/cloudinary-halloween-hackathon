@@ -71,7 +71,7 @@ export const ImagePreviewWrapper = styled.div`
 export const PreviewContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 16rem;
+  height: auto;
   border-radius: 0.5rem;
   overflow: hidden;
   border: 2px solid #f97316;
